@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Curso</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="curso" value="#{cursoBean.curso}" converter="cursoConverter"/>
+	</f:metadata>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Edição de Curso</h1>
+
+	<h:form id="CursoForm">
+		<h:panelGrid id="grid" columns="2" cellpadding="2">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{cursoBean.curso.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:dataList value="#{cursoBean.curso.escolas}" var="escola"
+				type="ordered" emptyMessage="Nenhuma escola cadastrada!">
+				<f:facet name="header">
+		            Escolas
+		        </f:facet>
+				<p:outputLabel value="#{escola.nome}" style="padding: 10px;" />
+			</p:dataList>
+
+		</h:panelGrid>
+
+
+		<p:commandButton id="submitButton" value="Atualizar"
+			action="#{cursoBean.atualizar}" update="grid" />
+
+	</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Usuario</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="usuario" value="#{usuarioBean.usuario}" />
+	</f:metadata>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Edição de Usuario</h1>
+
+	<h:form id="UsuarioForm">
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_usuario" value="Usuario:" />
+
+			<p:inputText id="lb_usuario" required="true"
+				requiredMessage="Usuario: Campo obrigatório!"
+				value="#{usuarioBean.usuario.usuario}" />
+			<p:message for="lb_usuario" />
+
+			<p:outputLabel for="lb_senha" value="Senha:" />
+			<p:inputText id="lb_senha" required="true"
+				requiredMessage="Senha: Campo obrigatório!"
+				value="#{usuarioBean.usuario.senha}" />
+			<p:message for="lb_senha" />
+
+			<p:outputLabel for="lb_mail" value="E-Mail:" />
+			<p:inputText id="lb_mail" required="true"
+				requiredMessage="E-mail: Campo obrigatório!"
+				value="#{usuarioBean.usuario.email}" />
+			<p:message for="lb_mail" />
+
+			<p:outputLabel for="lb_tipo" value="Tipo de Usuario:" />
+			<p:outputLabel id="lb_tipo" value="#{usuarioBean.tipoUsuario}" />
+			<p:message for="lb_tipo" />
+
+		</h:panelGrid>
+
+		<p:commandButton value="Atualizar" action="#{usuarioBean.atualizar}" />
+
+	</h:form>
+
+</h:body>
+</html>

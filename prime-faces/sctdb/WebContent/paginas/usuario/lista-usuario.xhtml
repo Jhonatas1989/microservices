@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Lista de Escolas</title>
+</h:head>
+
+<h:body>
+
+	<p:messages id="messages" showDetail="true" autoUpdate="true"
+		closable="true" />
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Lista de Usuarios</h1>
+	<h:form >
+		<p:dataTable emptyMessage="Não há Usuarios Cadastrados" var="usuario"
+			value="#{usuarioBean.listaUsuarios}">
+
+			<p:column headerText="Usuario">
+				<h:outputText value="#{usuario.usuario}" />
+			</p:column>
+
+			<p:column headerText="E-mail">
+				<h:outputText value="#{usuario.email}" />
+			</p:column>
+
+			<p:column headerText="Tipo Usuario">
+				<h:outputText value="#{usuarioBean.tipoUsuario(usuario)}" />
+			</p:column>
+
+			<p:column>
+				<h:button outcome="editar-usuario" value="editar">
+					<f:param name="usuario" value="#{usuario.id}"></f:param>
+				</h:button>
+				<h:commandButton value="excluir"
+					action="#{usuarioBean.excluir(usuario)}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

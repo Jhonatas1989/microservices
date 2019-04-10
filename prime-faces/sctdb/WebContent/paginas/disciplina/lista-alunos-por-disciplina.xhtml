@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Lista de Alunos por Disciplina</title>
+</h:head>
+
+<h:body>
+
+	<p:messages id="messages" showDetail="true" autoUpdate="true"
+		closable="true" />
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Lista de Alunos por Disciplina</h1>
+
+	<h:form>
+
+		<p:outputLabel rendered="#{not empty cursoBean.listaCursos}"
+			for="disciplina" value="Disciplina: " />
+		<p:selectOneMenu
+			rendered="#{not empty disciplinaBean.listaDisciplinas}" id="disciplina"
+			value="#{disciplinaBean.disciplina}" converter="disciplinaConverter">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{disciplinaBean.listaDisciplinas}"
+				var="disciplina" itemValue="#{disciplina}"
+				itemLabel="#{disciplina.nome}" />
+			<p:ajax listener="#{disciplinaBean.listarAlunos}" update="alunos" />
+		</p:selectOneMenu>
+
+		<br />
+		<br />
+
+		<p:dataTable id="alunos" emptyMessage="Não há professores cadastrados"
+			var="aluno" value="#{disciplinaBean.alunos}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{aluno.nome}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

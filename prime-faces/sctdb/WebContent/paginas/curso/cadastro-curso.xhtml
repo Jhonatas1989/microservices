@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Novo Curso</title>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Novo Curso</h1>
+
+	<p:messages id="messages" showDetail="false" autoUpdate="true"
+		closable="true" />
+	
+	<h2 style="color: red;">
+		<p:outputLabel rendered="#{empty cursoBean.listaEscola}"
+			value="Não é possivel cadastrar um curso, pois não há nenhuma Escola cadastrada"></p:outputLabel>
+	</h2>
+
+	<h:form rendered="#{not empty cursoBean.listaEscola}">
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{cursoBean.curso.nome}" />
+			<p:message for="lb_nome" />
+
+			<h3>Escolas</h3>
+			<p:selectManyCheckbox value="#{cursoBean.selectedEscolas}"
+				required="true"
+				requiredMessage="Escola: Selecione pelo menos uma escola!" converter="escolaConverter">
+				<f:selectItems value="#{cursoBean.listaEscola}" var="escola"
+					itemLabel="#{escola.nome}" itemValue="#{escola}" />
+			</p:selectManyCheckbox>
+
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Cadastrar"
+			action="#{cursoBean.cadastrar}" />
+
+	</h:form>
+
+</h:body>
+</html>

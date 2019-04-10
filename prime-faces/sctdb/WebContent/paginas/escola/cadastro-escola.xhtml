@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - <h:outputText value="#{escolaBean. editando ? 'Edição de Escola' : 'Nova Escola'}"></h:outputText></title>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	
+	<h1><h:outputText value="#{escolaBean.editando ? 'Edição de Escola' : 'Nova Escola'}"></h:outputText></h1>
+	
+	<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+	
+	<h:form id="EscolaForm">
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true" requiredMessage="Nome: Campo obrigatório!" value="#{escolaBean.escola.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_endereco" value="Endereço:" />
+			<p:inputText id="lb_endereco" required="true" requiredMessage="Endereço: Campo obrigatório!" value="#{escolaBean.escola.endereco}"/>
+			<p:message for="lb_endereco"  />
+
+			<p:outputLabel for="lb_telefone" value="Telefone" />
+			<p:inputText id="lb_telefone" required="true" requiredMessage="Telefone: Campo obrigatório!"  value="#{escolaBean.escola.telefone}" />
+			<p:message for="lb_telefone" />
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Cadastrar" action="#{escolaBean.cadastrar}" update="grid"/>
+
+	</h:form>
+
+</h:body>
+</html>

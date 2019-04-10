@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Aluno</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="aluno" value="#{alunoBean.aluno}" />
+	</f:metadata>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Edição de Aluno</h1>
+
+	<h:form id="AlunoForm">
+
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{alunoBean.aluno.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_cpf" value="CPF:" />
+			<p:inputText id="lb_cpf" required="true"
+				requiredMessage="CPF: Campo obrigatório!"
+				value="#{alunoBean.aluno.cpf}" />
+			<p:message for="lb_cpf" />
+
+			<p:outputLabel for="lb_email" value="E-mail" />
+			<p:inputText id="lb_email" required="true"
+				requiredMessage="E-mail: Campo obrigatório!"
+				value="#{alunoBean.aluno.email}" />
+			<p:message for="lb_email" />
+
+			<p:outputLabel for="lb_escola" value="Escola:" />
+			<p:outputLabel id="lb_escola" required="true"
+				requiredMessage="Escola: Campo obrigatório!"
+				value="#{alunoBean.aluno.escola.nome}" />
+			<p:message for="lb_escola" />
+
+
+			<p:outputLabel for="lb_curso" value="Curso" />
+			<p:outputLabel rendered="#{alunoBean.aluno.curso != null}"
+				required="true" requiredMessage="Curso: Campo obrigatório!"
+				value="#{alunoBean.aluno.curso.nome}" />
+			<p:selectOneMenu rendered="#{alunoBean.aluno.curso == null}"
+				converter="cursoConverter" id="lb_curso" value="#{alunoBean.aluno.curso}" >
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{alunoBean.listaCurso}" var="curso"
+					itemValue="#{curso}" itemLabel="#{curso.nome}" />
+			</p:selectOneMenu>
+
+			<p:message for="lb_curso" />
+
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Atualizar"
+			action="#{alunoBean.atualizar}" update="grid" />
+
+	</h:form>
+
+</h:body>
+</html>

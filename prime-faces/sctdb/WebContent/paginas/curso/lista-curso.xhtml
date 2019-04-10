@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Lista de Escolas</title>
+</h:head>
+
+<h:body>
+
+	<p:messages id="messages" showDetail="true" autoUpdate="true"
+		closable="true" />
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Lista de Cursos</h1>
+	<h:form>
+		<p:dataTable emptyMessage="Não há cursos cadastrados" var="curso"
+			value="#{cursoBean.listaCursos}">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{curso.nome}" />
+			</p:column>
+
+			<p:column headerText="Disciplinas">
+				<h:outputText value="#{cursoBean.disciplinas(curso)}"></h:outputText>
+			</p:column>
+
+			<p:column>
+				<h:button outcome="editar-curso" value="editar">
+					<f:param name="curso" value="#{curso.id}"></f:param>
+				</h:button>
+				<h:commandButton value="excluir"
+					action="#{cursoBean.excluir(curso)}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

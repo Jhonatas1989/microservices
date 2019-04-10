@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Nova Disciplina</title>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Nova Disciplina</h1>
+
+	<p:messages id="messages" showDetail="false" autoUpdate="true"
+		closable="true" />
+
+	<h2 style="color: red;">
+		<p:outputLabel rendered="#{empty disciplinaBean.listaCurso}"
+			value="Não é possivel cadastrar uma disciplina, pois não há nenhum Curso cadastrado"></p:outputLabel>
+	</h2>
+
+	<h:form rendered="#{not empty disciplinaBean.listaCurso}">
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{disciplinaBean.disciplina.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_ch" value="Carga Horaria:" />
+			<p:inputText id="lb_ch" required="true"
+				requiredMessage="Carga Horaria: Campo obrigatório!"
+				value="#{disciplinaBean.disciplina.cargaHoraria}" />
+			<p:message for="lb_ch" />
+
+			<h3>Cursos</h3>
+			<p:selectManyCheckbox value="#{disciplinaBean.selectedCursos}"
+				required="true"
+				requiredMessage="Curso: Selecione pelo menos um curso!" converter="cursoConverter">
+				<f:selectItems value="#{disciplinaBean.listaCurso}" var="curso"
+					itemLabel="#{curso.nome}" itemValue="#{curso}" />
+			</p:selectManyCheckbox>
+
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Cadastrar"
+			action="#{disciplinaBean.cadastrar}" />
+
+	</h:form>
+
+</h:body>
+</html>

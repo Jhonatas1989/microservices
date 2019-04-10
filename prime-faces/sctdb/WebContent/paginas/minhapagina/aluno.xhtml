@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Minha Pagina Aluno</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Minha Pagina Aluno</h1>
+
+	<h3>
+		<p:outputLabel
+			value="#{minhaPaginaAlunoBean.aluno.nome}, Seja Bem Vindo! " />
+	</h3>
+	<h4>
+		<p:outputLabel
+			value="Cursando #{minhaPaginaAlunoBean.aluno.curso.nome}" />
+	</h4>
+	<p:dataTable var="nota" value="#{minhaPaginaAlunoBean.aluno.notas}">
+
+		<p:column headerText="Disciplina">
+			<h:outputText value="#{nota.disciplina.nome}" />
+		</p:column>
+
+		<p:column headerText="Projeto 1">
+			<h:outputText value="#{nota.projeto1}" />
+		</p:column>
+		<p:column headerText="Projeto 2">
+			<h:outputText value="#{nota.projeto2}" />
+		</p:column>
+
+		<p:column headerText="Atividade Pratica">
+			<h:outputText value="#{nota.atividadePratica}" />
+		</p:column>
+		<p:column headerText="Situação">
+			<h:outputText value="#{minhaPaginaAlunoBean.aprovacao(nota)}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>

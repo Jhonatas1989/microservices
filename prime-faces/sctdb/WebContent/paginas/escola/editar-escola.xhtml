@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Escola</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="escola" value="#{escolaBean.escola}" converter="escolaConverter"/>
+	</f:metadata>
+	
+	<ui:include src="../menu.xhtml" />
+	
+	<h1>Edição de Escola</h1>
+	
+	<h:form id="EscolaForm">
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true" value="#{escolaBean.escola.nome}" />
+			<p:message for="lb_nome" display="text" />
+
+			<p:outputLabel for="lb_endereco" value="Endereço:" />
+			<p:inputText id="lb_endereco" required="true" value="#{escolaBean.escola.endereco}"/>
+			<p:message for="lb_endereco" display="icon" />
+
+			<p:outputLabel for="lb_telefone" value="Telefone" />
+			<p:inputText id="lb_telefone" required="true" value="#{escolaBean.escola.telefone}" />
+			<p:message for="lb_telefone" display="tooltip" />
+		</h:panelGrid>
+
+		<p:commandButton value="Atualizar" action="#{escolaBean.atualizar}" />
+
+	</h:form>
+
+</h:body>
+</html>

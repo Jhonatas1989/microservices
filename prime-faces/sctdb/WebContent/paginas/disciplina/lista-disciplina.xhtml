@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Lista de Escolas</title>
+</h:head>
+
+<h:body>
+
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Lista de Disciplinas</h1>
+	<h:form >
+		<p:dataTable emptyMessage="Não há disciplina cadastrados" var="disciplina"
+			value="#{disciplinaBean.listaDisciplinas}">
+	
+			<p:column headerText="Nome">
+				<h:outputText value="#{disciplina.nome}" />
+			</p:column>
+	
+			<p:column headerText="Carga Horaria">
+				<h:outputText value="#{disciplina.cargaHoraria}" />
+			</p:column>
+			
+			<p:column headerText="Professores">
+				<h:outputText value="#{disciplinaBean.professores(disciplina)}" />
+			</p:column>
+	
+			<p:column headerText="Cursos">
+				<h:outputText value="#{disciplinaBean.cursos(disciplina)}" />
+			</p:column>
+			
+			<p:column>
+				<h:button outcome="editar-disciplina" value="editar">
+					<f:param name="disciplina" value="#{disciplina.id}"></f:param>
+				</h:button>
+				<h:commandButton value="excluir"
+					action="#{disciplinaBean.excluir(disciplina)}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

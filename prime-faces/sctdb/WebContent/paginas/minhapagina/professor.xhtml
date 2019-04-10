@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SCT - Minha Pagina Professor</title>
+</h:head>
+
+<h:body>
+
+	<p:messages id="messages" showDetail="true" autoUpdate="true"
+		closable="true" />
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Minha Pagina Professor</h1>
+
+	<h3>
+		<p:outputLabel
+			value="#{minhaPaginaProfessorBean.professor.nome}, Seja Bem Vindo!" />
+	</h3>
+
+	<h:form	>
+
+		<p:outputLabel rendered="#{not empty minhaPaginaProfessorBean.listaDisciplinas}" for="curso" value="Curso: " />
+		<p:selectOneMenu rendered="#{not empty minhaPaginaProfessorBean.listaDisciplinas}" id="curso"
+			value="#{minhaPaginaProfessorBean.disciplina}"
+			converter="disciplinaConverter">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{minhaPaginaProfessorBean.listaDisciplinas}"
+				var="disciplina" itemValue="#{disciplina}"
+				itemLabel="#{disciplina.nome}" />
+			<p:ajax listener="#{minhaPaginaProfessorBean.listarAlunos}"
+				update="alunosMatriculados" />
+		</p:selectOneMenu>
+
+		<br />
+		<br />
+
+		<p:dataTable id="alunosMatriculados"
+			emptyMessage="Nenhum aluno matriculado nesta disciplina!" var="aluno"
+			value="#{minhaPaginaProfessorBean.alunos}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{aluno.nome}" />
+			</p:column>
+
+			<p:column headerText="Projeto 1">
+				<h:outputText value="#{minhaPaginaProfessorBean.projeto1(aluno)}" />
+			</p:column>
+			<p:column headerText="Projeto 2">
+				<h:outputText value="#{minhaPaginaProfessorBean.projeto2(aluno)}" />
+			</p:column>
+
+			<p:column headerText="Atividade Pratica">
+				<h:outputText
+					value="#{minhaPaginaProfessorBean.atividadePratica(aluno)}" />
+			</p:column>
+			<p:column headerText="Situação">
+				<h:outputText value="#{minhaPaginaProfessorBean.aprovacao(aluno)}" />
+			</p:column>
+			<p:column>
+				<h:button outcome="cadastrar-nota" value="editar">
+					<f:param name="nota"
+						value="#{minhaPaginaProfessorBean.idNotaAluno(aluno)}"></f:param>
+				</h:button>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Novo Professor</title>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Novo Professor</h1>
+
+	<p:messages id="messages" showDetail="false" autoUpdate="true"
+		closable="true" />
+
+	<h2 style="color: red;">
+		<p:outputLabel rendered="#{empty professorBean.listaEscola}"
+			value="Não é possivel cadastrar um professor, pois não há nenhuma Escola cadastrada"></p:outputLabel>
+	</h2>
+
+	<h:form rendered="#{not empty professorBean.listaEscola}">
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{professorBean.professor.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_cpf" value="CPF:" />
+			<p:inputText id="lb_cpf" required="true"
+				requiredMessage="CPF: Campo obrigatório!"
+				value="#{professorBean.professor.cpf}" />
+			<p:message for="lb_cpf" />
+
+			<p:outputLabel for="lb_email" value="E-mail" />
+			<p:inputText id="lb_email" required="true"
+				requiredMessage="E-mail: Campo obrigatório!"
+				value="#{professorBean.professor.email}" />
+			<p:message for="lb_email" />
+
+			<h3>Escolas</h3>
+			<p:selectManyCheckbox value="#{professorBean.selectedEscolas}"
+				required="true"
+				requiredMessage="Escola: Selecione pelo menos uma escola!"
+				converter="escolaConverter">
+				<f:selectItems value="#{professorBean.listaEscola}" var="escola"
+					itemLabel="#{escola.nome}" itemValue="#{escola}" />
+			</p:selectManyCheckbox>
+
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Cadastrar"
+			action="#{professorBean.cadastrar}" />
+
+	</h:form>
+
+</h:body>
+</html>

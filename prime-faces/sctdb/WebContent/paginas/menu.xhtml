@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<h:form rendered="#{loginBean.loggedIn}">
+		<h:commandButton value="Deslogar" action="#{loginBean.deslogar}" />
+	</h:form>
+	<p:menubar rendered="#{loginBean.usuario.tipo == 1}">
+		<p:submenu label="Escola">
+			<p:menuitem value="Novo" url="/paginas/escola/cadastro-escola.faces" />
+			<p:separator />
+			<p:menuitem value="Lista" url="/paginas/escola/lista-escola.faces" />
+		</p:submenu>
+		<p:submenu label="Professor">
+			<p:menuitem value="Novo"
+				url="/paginas/professor/cadastro-professor.faces" />
+			<p:separator />
+			<p:menuitem value="Lista"
+				url="/paginas/professor/lista-professor.faces" />
+			<p:separator />
+			<p:menuitem value="Lista de Alunos por Professor"
+				url="/paginas/professor/lista-alunos-por-professor.faces" />
+			<p:separator />
+			<p:menuitem value="Lista de Cursos por Professor"
+				url="/paginas/professor/lista-cursos-por-professor.faces" />
+		</p:submenu>
+		<p:submenu label="Curso">
+			<p:menuitem value="Novo" url="/paginas/curso/cadastro-curso.faces" />
+			<p:separator />
+			<p:menuitem value="Lista" url="/paginas/curso/lista-curso.faces" />
+			<p:separator />
+			<p:menuitem value="Lista de Alunos por Curso"
+				url="/paginas/curso/lista-alunos-por-curso.faces" />
+		</p:submenu>
+		<p:submenu label="Usuario">
+			<p:menuitem value="Novo"
+				url="/paginas/usuario/cadastro-usuario.faces" />
+			<p:separator />
+			<p:menuitem value="Lista" url="/paginas/usuario/lista-usuario.faces" />
+		</p:submenu>
+		<p:submenu label="Disciplina">
+			<p:menuitem value="Novo"
+				url="/paginas/disciplina/cadastro-disciplina.faces" />
+			<p:separator />
+			<p:menuitem value="Lista"
+				url="/paginas/disciplina/lista-disciplina.faces" />
+			<p:separator />
+			<p:menuitem value="Lista de Alunos por Disciplina"
+				url="/paginas/disciplina/lista-alunos-por-disciplina.faces" />
+		</p:submenu>
+		<p:submenu label="Aluno">
+			<p:menuitem value="Novo" url="/paginas/aluno/cadastro-aluno.faces" />
+			<p:separator />
+			<p:menuitem value="Lista" url="/paginas/aluno/lista-aluno.faces" />
+		</p:submenu>
+	</p:menubar>
+</h:body>
+</html>

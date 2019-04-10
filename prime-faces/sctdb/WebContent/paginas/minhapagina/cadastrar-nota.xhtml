@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Professor</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="nota" value="#{minhaPaginaProfessorBean.nota}" />
+	</f:metadata>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Cadastro de Notas</h1>
+	<h2>
+		Aluno:
+		<h:outputLabel value="#{minhaPaginaProfessorBean.nota.aluno.nome}" />
+	</h2>
+	<h2>
+		Disciplina:
+		<h:outputLabel
+			value="#{minhaPaginaProfessorBean.nota.disciplina.nome}" />
+	</h2>
+	<h:form id="NotaForm">
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_projeto1" value="Projeto 1: " />
+			<p:outputLabel
+				rendered="#{minhaPaginaProfessorBean.nota.projeto1 != null}"
+				value="#{minhaPaginaProfessorBean.nota.projeto1}" />
+			<p:inputText
+				rendered="#{minhaPaginaProfessorBean.nota.projeto1 == null}"
+				id="lb_projeto1" value="#{minhaPaginaProfessorBean.nota.projeto1}" />
+			<p:message for="lb_projeto1" />
+
+			<p:outputLabel for="lb_projeto2" value="Projeto 2: " />
+			<p:outputLabel
+				rendered="#{minhaPaginaProfessorBean.nota.projeto2 != null}"
+				value="#{minhaPaginaProfessorBean.nota.projeto2}" />
+			<p:inputText
+				rendered="#{minhaPaginaProfessorBean.nota.projeto2 == null}"
+				id="lb_projeto2" value="#{minhaPaginaProfessorBean.nota.projeto2}" />
+			<p:message for="lb_projeto2" />
+
+			<p:outputLabel for="lb_atividade" value="Atividade Pratica: " />
+			<p:outputLabel
+				rendered="#{minhaPaginaProfessorBean.nota.atividadePratica != null}"
+				value="#{minhaPaginaProfessorBean.nota.atividadePratica}" />
+			<p:inputText
+				rendered="#{minhaPaginaProfessorBean.nota.atividadePratica == null}"
+				id="lb_atividade"
+				value="#{minhaPaginaProfessorBean.nota.atividadePratica}" />
+			<p:message for="lb_atividade" />
+
+			<p:commandButton id="submitButton" value="Atualizar"
+				action="#{minhaPaginaProfessorBean.cadastraNota}" update="grid" />
+
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+</html>

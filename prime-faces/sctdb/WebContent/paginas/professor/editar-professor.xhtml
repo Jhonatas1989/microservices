@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Edição de Professor</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="professor" value="#{professorBean.professor}" converter="professorConverter" />
+	</f:metadata>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Edição de Professor</h1>
+
+	<h:form id="ProfessorForm">
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{professorBean.professor.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_cpf" value="CPF:" />
+			<p:inputText id="lb_cpf" required="true"
+				requiredMessage="CPF: Campo obrigatório!"
+				value="#{professorBean.professor.cpf}" />
+			<p:message for="lb_cpf" />
+
+			<p:outputLabel for="lb_email" value="E-mail" />
+			<p:inputText id="lb_email" required="true"
+				requiredMessage="E-mail: Campo obrigatório!"
+				value="#{professorBean.professor.email}" />
+			<p:message for="lb_email" />
+
+			<p:outputLabel
+				rendered="#{empty professorBean.professor.disciplinas}"
+				for="lb_disciplinas" value="Disciplinas" />
+			<p:selectManyCheckbox id="lb_disciplinas"
+				rendered="#{empty professorBean.professor.disciplinas}"
+				value="#{professorBean.selectedDisciplinas}" required="true"
+				requiredMessage="Disciplina: Selecione pelo menos uma escola!"
+				converter="disciplinaConverter">
+				<f:selectItems value="#{professorBean.listaDisciplina}"
+					var="disciplina" itemLabel="#{disciplina.nome}"
+					itemValue="#{disciplina}" />
+			</p:selectManyCheckbox>
+			<p:message for="lb_disciplinas" />
+
+
+			<p:dataList
+				rendered="#{not empty professorBean.professor.disciplinas}"
+				value="#{professorBean.professor.disciplinas}" var="disciplina"
+				type="ordered" emptyMessage="Nenhuma disciplina cadastrada!">
+				<f:facet name="header">
+		            Disciplina
+		        </f:facet>
+				<p:outputLabel value="#{disciplina.nome}" style="padding: 10px;" />
+			</p:dataList>
+
+			<p:dataList value="#{professorBean.professor.escolas}" var="escola"
+				type="ordered" emptyMessage="Nenhuma escola cadastrada!">
+				<f:facet name="header">
+		            Escolas
+		        </f:facet>
+				<p:outputLabel value="#{escola.nome}" style="padding: 10px;" />
+			</p:dataList>
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Atualizar"
+			action="#{professorBean.atualizar}" update="grid" />
+
+	</h:form>
+
+</h:body>
+</html>

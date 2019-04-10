@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>SCT - Novo Aluno</title>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Novo Aluno</h1>
+
+	<p:messages id="messages" showDetail="false" autoUpdate="true"
+		closable="true" />
+
+	<h2 style="color: red;">
+		<p:outputLabel
+			rendered="#{empty alunoBean.listaEscola or empty alunoBean.listaCurso}"
+			value="Não é possivel cadastrar um aluno: "></p:outputLabel>
+	</h2>
+	<h3 style="color: red;">
+		<p:outputLabel rendered="#{empty alunoBean.listaEscola}"
+			value="Não há nenhuma escola cadastrada"></p:outputLabel>
+		<br />
+		<p:outputLabel rendered="#{empty alunoBean.listaCurso}"
+			value="Não há nenhum curso cadastrado"></p:outputLabel>
+	</h3>
+
+	<h:form
+		rendered="#{not empty alunoBean.listaEscola and not empty alunoBean.listaCurso}">
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<p:outputLabel for="lb_nome" value="Nome:" />
+			<p:inputText id="lb_nome" required="true"
+				requiredMessage="Nome: Campo obrigatório!"
+				value="#{alunoBean.aluno.nome}" />
+			<p:message for="lb_nome" />
+
+			<p:outputLabel for="lb_cpf" value="CPF:" />
+			<p:inputText id="lb_cpf" required="true"
+				requiredMessage="CPF: Campo obrigatório!"
+				value="#{alunoBean.aluno.cpf}" />
+			<p:message for="lb_cpf" />
+
+			<p:outputLabel for="lb_email" value="E-mail" />
+			<p:inputText id="lb_email" required="true"
+				requiredMessage="E-mail: Campo obrigatório!"
+				value="#{alunoBean.aluno.email}" />
+			<p:message for="lb_email" />
+
+			<p:outputLabel for="escola" value="Escola" />
+			<p:selectOneMenu id="escola" value="#{alunoBean.aluno.escola}"
+				converter="escolaConverter" required="true"
+				requiredMessage="Escola: Campo obrigatório!">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{alunoBean.listaEscola}" var="escola"
+					itemValue="#{escola}" itemLabel="#{escola.nome}" />
+			</p:selectOneMenu>
+			<p:message for="escola" />
+
+		</h:panelGrid>
+
+		<p:commandButton id="submitButton" value="Cadastrar"
+			action="#{alunoBean.cadastrar}" />
+
+	</h:form>
+
+</h:body>
+</html>
