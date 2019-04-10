@@ -14,6 +14,9 @@ public class GenericDao<T> implements Dao<T> {
 	private final Class<T> classe;
 	protected EntityManager em;
 
+	/**
+	 * @param classe
+	 */
 	public GenericDao(Class<T> classe) {
 		this.classe = classe;
 		em = JpaUtil.getEntityManager();
@@ -83,4 +86,5 @@ public class GenericDao<T> implements Dao<T> {
 			em.close();
 		}
 	}
+	
 }

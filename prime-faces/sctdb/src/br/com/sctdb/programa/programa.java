@@ -8,6 +8,10 @@ import br.com.sctdb.entity.Escola;
 import br.com.sctdb.entity.Nota;
 import br.com.sctdb.entity.Professor;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 public class programa {
 	public static void main(String[] args) {
 

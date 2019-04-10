@@ -8,6 +8,10 @@ import javax.faces.convert.FacesConverter;
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @FacesConverter(forClass = Aluno.class)
 public class AlunoConverter implements Converter {
 

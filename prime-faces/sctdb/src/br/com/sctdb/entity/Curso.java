@@ -25,6 +25,9 @@ import javax.persistence.UniqueConstraint;
 @NamedQuery(name = "Curso.findAll", query = "select f from Curso f")
 public class Curso implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -44,34 +47,78 @@ public class Curso implements Serializable {
 	@ManyToMany(mappedBy = "cursos")
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 
+	/**
+	 * 
+	 */
+	public Curso() {
+	}
+
+	/**
+	 * @param id
+	 * @param nome
+	 * @param escolas
+	 * @param disciplinas
+	 */
+	public Curso(int id, String nome, List<Escola> escolas, List<Disciplina> disciplinas) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.escolas = escolas;
+		this.disciplinas = disciplinas;
+	}
+
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the escolas
+	 */
 	public List<Escola> getEscolas() {
 		return escolas;
 	}
 
+	/**
+	 * @param escolas the escolas to set
+	 */
 	public void setEscolas(List<Escola> escolas) {
 		this.escolas = escolas;
 	}
 
+	/**
+	 * @return the disciplinas
+	 */
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
+	/**
+	 * @param disciplinas the disciplinas to set
+	 */
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
@@ -102,6 +149,11 @@ public class Curso implements Serializable {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Curso [id=" + id + ", nome=" + nome + ", escolas=" + escolas + ", disciplinas=" + disciplinas + "]";
 	}
 
 }

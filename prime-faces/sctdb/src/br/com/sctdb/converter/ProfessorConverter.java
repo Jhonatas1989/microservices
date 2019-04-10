@@ -8,6 +8,10 @@ import javax.faces.convert.FacesConverter;
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Professor;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @FacesConverter("professorConverter")
 public class ProfessorConverter implements Converter {
 

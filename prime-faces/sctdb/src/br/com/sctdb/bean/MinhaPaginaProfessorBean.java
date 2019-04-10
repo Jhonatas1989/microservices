@@ -6,9 +6,8 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -18,10 +17,17 @@ import br.com.sctdb.entity.Professor;
 import br.com.sctdb.entity.Usuario;
 import br.com.sctdb.util.SessionUtils;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class MinhaPaginaProfessorBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private Professor professor;
@@ -30,20 +36,19 @@ public class MinhaPaginaProfessorBean implements Serializable {
 	private Disciplina disciplina;
 	private Nota nota;
 
+	/**
+	 * 
+	 */
 	public MinhaPaginaProfessorBean() {
 		professor = pegarProfessor(SessionUtils.getUser());
 		alunos = new ArrayList<Aluno>();
 		nota = new Nota();
 	}
 
-	public List<Disciplina> getListaDisciplinas() {
-		return this.professor.getDisciplinas();
-	}
-
-	public void listarAlunos(AjaxBehaviorEvent event) {
-		this.alunos = this.disciplina.getAlunos();
-	}
-
+	/**
+	 * @param aluno
+	 * @return
+	 */
 	public Double projeto1(Aluno aluno) {
 		Double projeto1 = null;
 		for (Nota nota : aluno.getNotas()) {
@@ -59,6 +64,10 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return projeto1;
 	}
 
+	/**
+	 * @param aluno
+	 * @return
+	 */
 	public Double projeto2(Aluno aluno) {
 		Double projeto2 = null;
 		for (Nota nota : aluno.getNotas()) {
@@ -74,6 +83,10 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return projeto2;
 	}
 
+	/**
+	 * @param aluno
+	 * @return
+	 */
 	public Double atividadePratica(Aluno aluno) {
 		Double atividadePratica = null;
 		for (Nota nota : aluno.getNotas()) {
@@ -89,6 +102,10 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return atividadePratica;
 	}
 
+	/**
+	 * @param aluno
+	 * @return
+	 */
 	public String aprovacao(Aluno aluno) {
 		String aprovado;
 		Double nota1 = projeto1(aluno) * 0.3;
@@ -103,6 +120,10 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return aprovado;
 	}
 
+	/**
+	 * @param aluno
+	 * @return
+	 */
 	public Integer idNotaAluno(Aluno aluno) {
 		Integer idNota = null;
 		for (Nota nota : aluno.getNotas()) {
@@ -113,6 +134,9 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return idNota;
 	}
 
+	/**
+	 * @return
+	 */
 	public String cadastraNota() {
 		GenericDao<Nota> ndao = new GenericDao<Nota>(Nota.class);
 		try {
@@ -126,6 +150,10 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return "professor";
 	}
 
+	/**
+	 * @param user
+	 * @return
+	 */
 	public Professor pegarProfessor(Usuario user) {
 		Professor profe = null;
 		for (Professor professor : pdao.listar()) {
@@ -136,34 +164,72 @@ public class MinhaPaginaProfessorBean implements Serializable {
 		return profe;
 	}
 
+	/**
+	 * @return the professor
+	 */
 	public Professor getProfessor() {
 		return professor;
 	}
 
+	/**
+	 * @param professor the professor to set
+	 */
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
 
+	/**
+	 * @return the pdao
+	 */
+	public GenericDao<Professor> getPdao() {
+		return pdao;
+	}
+
+	/**
+	 * @param pdao the pdao to set
+	 */
+	public void setPdao(GenericDao<Professor> pdao) {
+		this.pdao = pdao;
+	}
+
+	/**
+	 * @return the alunos
+	 */
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
+	/**
+	 * @param alunos the alunos to set
+	 */
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 
+	/**
+	 * @return the disciplina
+	 */
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 
+	/**
+	 * @param disciplina the disciplina to set
+	 */
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
 
+	/**
+	 * @return the nota
+	 */
 	public Nota getNota() {
 		return nota;
 	}
 
+	/**
+	 * @param nota the nota to set
+	 */
 	public void setNota(Nota nota) {
 		this.nota = nota;
 	}

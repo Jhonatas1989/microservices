@@ -3,7 +3,7 @@ package br.com.sctdb.bean;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -11,19 +11,33 @@ import br.com.sctdb.entity.Nota;
 import br.com.sctdb.entity.Usuario;
 import br.com.sctdb.util.SessionUtils;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class MinhaPaginaAlunoBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private GenericDao<Aluno> adao = new GenericDao<Aluno>(Aluno.class);
 	private Aluno aluno;
 
+	/**
+	 * 
+	 */
 	public MinhaPaginaAlunoBean() {
 		aluno = pegarAluno(SessionUtils.getUser());
 	}
 
+	/**
+	 * @param nota
+	 * @return
+	 */
 	public String aprovacao(Nota nota) {
 		String aprovado;
 		Double nota1 = 0.0;
@@ -46,21 +60,45 @@ public class MinhaPaginaAlunoBean implements Serializable {
 		}
 		return aprovado;
 	}
-	
-	public Aluno pegarAluno(Usuario user){
+
+	/**
+	 * @param user
+	 * @return
+	 */
+	public Aluno pegarAluno(Usuario user) {
 		Aluno al = null;
 		for (Aluno aluno : adao.listar()) {
-			if(aluno.getEmail().equals(user.getEmail())){
+			if (aluno.getEmail().equals(user.getEmail())) {
 				al = aluno;
 			}
 		}
 		return al;
 	}
 
+	/**
+	 * @return the adao
+	 */
+	public GenericDao<Aluno> getAdao() {
+		return adao;
+	}
+
+	/**
+	 * @param adao the adao to set
+	 */
+	public void setAdao(GenericDao<Aluno> adao) {
+		this.adao = adao;
+	}
+
+	/**
+	 * @return the aluno
+	 */
 	public Aluno getAluno() {
 		return aluno;
 	}
 
+	/**
+	 * @param aluno the aluno to set
+	 */
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}

@@ -27,6 +27,9 @@ import javax.persistence.UniqueConstraint;
 @NamedQuery(name = "Professor.findAll", query = "select f from Professor f")
 public class Professor implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -58,58 +61,127 @@ public class Professor implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
+	/**
+	 * 
+	 */
+	public Professor() {
+	}
+
+	/**
+	 * @param id
+	 * @param nome
+	 * @param cpf
+	 * @param email
+	 * @param escolas
+	 * @param disciplinas
+	 * @param usuario
+	 */
+	public Professor(int id, String nome, String cpf, String email, List<Escola> escolas, List<Disciplina> disciplinas,
+			Usuario usuario) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.escolas = escolas;
+		this.disciplinas = disciplinas;
+		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the cpf
+	 */
 	public String getCpf() {
 		return cpf;
 	}
 
+	/**
+	 * @param cpf the cpf to set
+	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the escolas
+	 */
 	public List<Escola> getEscolas() {
 		return escolas;
 	}
 
+	/**
+	 * @param escolas the escolas to set
+	 */
 	public void setEscolas(List<Escola> escolas) {
 		this.escolas = escolas;
 	}
 
+	/**
+	 * @return the disciplinas
+	 */
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
+	/**
+	 * @param disciplinas the disciplinas to set
+	 */
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 
+	/**
+	 * @return the usuario
+	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
+	/**
+	 * @param usuario the usuario to set
+	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}

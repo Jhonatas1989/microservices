@@ -6,24 +6,37 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Usuario;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
 	private String tipoUsuario;
 
+	/**
+	 * 
+	 */
 	public UsuarioBean() {
 		usuario = new Usuario();
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrar() {
 		GenericDao<Usuario> udao = new GenericDao<Usuario>(Usuario.class);
 		try {
@@ -39,6 +52,9 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String atualizar() {
 		GenericDao<Usuario> udao = new GenericDao<Usuario>(Usuario.class);
 		try {
@@ -54,6 +70,9 @@ public class UsuarioBean implements Serializable {
 		return "lista-usuario";
 	}
 
+	/**
+	 * @param user
+	 */
 	public void excluir(Usuario user) {
 		GenericDao<Usuario> udao = new GenericDao<Usuario>(Usuario.class);
 		try {
@@ -66,6 +85,9 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparUsuario() {
 		this.usuario.setEmail("");
 		this.usuario.setTipo(null);
@@ -73,15 +95,25 @@ public class UsuarioBean implements Serializable {
 		this.usuario.setSenha("");
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Usuario> getListaUsuarios() {
 		GenericDao<Usuario> udao = new GenericDao<Usuario>(Usuario.class);
 		return udao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
+	/**
+	 * @param usuario
+	 * @return
+	 */
 	public String tipoUsuario(Usuario usuario) {
 		int tipo = usuario.getTipo().intValue();
 		String strTipo = "";
@@ -95,6 +127,9 @@ public class UsuarioBean implements Serializable {
 		return strTipo;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getTipoUsuario() {
 		if (isEditando()) {
 			tipoUsuario = tipoUsuario(this.usuario);
@@ -102,14 +137,23 @@ public class UsuarioBean implements Serializable {
 		return tipoUsuario;
 	}
 
+	/**
+	 * @param tipoUsuario
+	 */
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
+	/**
+	 * @param usuario
+	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isEditando() {
 		Integer idUsuario = this.usuario.getId();
 		return idUsuario != null;

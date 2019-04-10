@@ -8,7 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -16,6 +16,10 @@ import br.com.sctdb.entity.Curso;
 import br.com.sctdb.entity.Disciplina;
 import br.com.sctdb.entity.Professor;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class DisciplinaBean implements Serializable {

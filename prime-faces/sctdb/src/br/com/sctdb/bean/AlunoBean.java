@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -16,20 +16,33 @@ import br.com.sctdb.entity.Escola;
 import br.com.sctdb.entity.Nota;
 import br.com.sctdb.entity.Usuario;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class AlunoBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private Aluno aluno;
 	private Usuario user;
 
+	/**
+	 * 
+	 */
 	public AlunoBean() {
 		aluno = new Aluno();
 		user = new Usuario();
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrar() {
 		GenericDao<Aluno> adao = new GenericDao<Aluno>(Aluno.class);
 		try {
@@ -46,6 +59,9 @@ public class AlunoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String atualizar() {
 		GenericDao<Aluno> adao = new GenericDao<Aluno>(Aluno.class);
 		try {
@@ -62,6 +78,9 @@ public class AlunoBean implements Serializable {
 		return "lista-aluno";
 	}
 
+	/**
+	 * @param alu
+	 */
 	public void excluir(Aluno alu) {
 		GenericDao<Aluno> adao = new GenericDao<Aluno>(Aluno.class);
 		try {
@@ -74,6 +93,9 @@ public class AlunoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @param curso
+	 */
 	public void cadastrarDisciplinas(Curso curso) {
 		for (Disciplina disciplina : curso.getDisciplinas()) {
 			GenericDao<Nota> ndao = new GenericDao<Nota>(Nota.class);
@@ -85,6 +107,9 @@ public class AlunoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrarUsuario() {
 		this.user.setUsuario(this.aluno.getNome().trim());
 		this.user.setEmail(this.aluno.getEmail());
@@ -92,6 +117,9 @@ public class AlunoBean implements Serializable {
 		this.user.setTipo(3);
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparAluno() {
 		this.aluno.setNome("");
 		this.aluno.setEmail("");
@@ -101,39 +129,63 @@ public class AlunoBean implements Serializable {
 		this.aluno.getNotas().clear();
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparUsuario() {
 		this.user.setEmail("");
 		this.user.setSenha("");
 		this.user.setTipo(null);
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Curso> getListaCurso() {
 		GenericDao<Curso> cdao = new GenericDao<Curso>(Curso.class);
 		return cdao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Escola> getListaEscola() {
 		GenericDao<Escola> edao = new GenericDao<Escola>(Escola.class);
 		return edao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Aluno> getListaAluno() {
 		GenericDao<Aluno> adao = new GenericDao<Aluno>(Aluno.class);
 		return adao.listar();
 	}
 
+	/**
+	 * @return the aluno
+	 */
 	public Aluno getAluno() {
 		return aluno;
 	}
 
+	/**
+	 * @param aluno the aluno to set
+	 */
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
 
+	/**
+	 * @return the user
+	 */
 	public Usuario getUser() {
 		return user;
 	}
 
+	/**
+	 * @param user the user to set
+	 */
 	public void setUser(Usuario user) {
 		this.user = user;
 	}

@@ -9,7 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -19,10 +19,17 @@ import br.com.sctdb.entity.Escola;
 import br.com.sctdb.entity.Professor;
 import br.com.sctdb.entity.Usuario;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class ProfessorBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private Professor professor;
@@ -33,6 +40,9 @@ public class ProfessorBean implements Serializable {
 	private Set<Aluno> alunos;
 	private Set<Curso> cursos;
 
+	/**
+	 * 
+	 */
 	public ProfessorBean() {
 		professor = new Professor();
 		user = new Usuario();
@@ -40,6 +50,9 @@ public class ProfessorBean implements Serializable {
 		cursos = new HashSet<Curso>();
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrar() {
 		GenericDao<Professor> pdao = new GenericDao<Professor>(Professor.class);
 		cadastrarUsuario();
@@ -59,6 +72,9 @@ public class ProfessorBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String atualizar() {
 		GenericDao<Professor> pdao = new GenericDao<Professor>(Professor.class);
 		try {
@@ -75,6 +91,9 @@ public class ProfessorBean implements Serializable {
 		return "lista-professor";
 	}
 
+	/**
+	 * @param prof
+	 */
 	public void excluir(Professor prof) {
 		GenericDao<Professor> pdao = new GenericDao<Professor>(Professor.class);
 		try {
@@ -87,6 +106,9 @@ public class ProfessorBean implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrarUsuario() {
 		this.user.setUsuario(this.professor.getNome().trim());
 		this.user.setEmail(this.professor.getEmail());
@@ -94,6 +116,9 @@ public class ProfessorBean implements Serializable {
 		this.user.setTipo(2);
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparProfessor() {
 		System.out.println("Limpar Professor");
 		this.professor.setNome("");
@@ -102,6 +127,9 @@ public class ProfessorBean implements Serializable {
 		this.professor.getEscolas().clear();
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparUsuario() {
 		System.out.println("Limpar Usuario");
 		this.user.setEmail("");
@@ -109,21 +137,33 @@ public class ProfessorBean implements Serializable {
 		this.user.setTipo(null);
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Professor> getListaProfessores() {
 		GenericDao<Professor> pdao = new GenericDao<Professor>(Professor.class);
 		return pdao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Escola> getListaEscola() {
 		GenericDao<Escola> edao = new GenericDao<Escola>(Escola.class);
 		return edao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Disciplina> getListaDisciplina() {
 		GenericDao<Disciplina> ddao = new GenericDao<Disciplina>(Disciplina.class);
 		return ddao.listar();
 	}
 
+	/**
+	 * @param event
+	 */
 	public void listarAlunos(AjaxBehaviorEvent event) {
 		for (Disciplina disciplina : this.professor.getDisciplinas()) {
 			for (Aluno al : disciplina.getAlunos()) {
@@ -132,6 +172,9 @@ public class ProfessorBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 */
 	public void listarCursos(AjaxBehaviorEvent event) {
 		for (Disciplina disciplina : this.professor.getDisciplinas()) {
 			for (Curso curso : disciplina.getCursos()) {
@@ -140,47 +183,94 @@ public class ProfessorBean implements Serializable {
 		}
 	}
 
-	public Professor getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
+	/**
+	 * @return
+	 */
 	public boolean isEditando() {
 		Integer idProfessor = this.professor.getId();
 		return idProfessor != null;
 	}
 
+	/**
+	 * @return the professor
+	 */
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	/**
+	 * @param professor the professor to set
+	 */
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public Usuario getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the selectedEscolas
+	 */
 	public List<Escola> getSelectedEscolas() {
 		return selectedEscolas;
 	}
 
+	/**
+	 * @param selectedEscolas the selectedEscolas to set
+	 */
 	public void setSelectedEscolas(List<Escola> selectedEscolas) {
 		this.selectedEscolas = selectedEscolas;
 	}
 
+	/**
+	 * @return the selectedDisciplinas
+	 */
 	public List<Disciplina> getSelectedDisciplinas() {
 		return selectedDisciplinas;
 	}
 
+	/**
+	 * @param selectedDisciplinas the selectedDisciplinas to set
+	 */
 	public void setSelectedDisciplinas(List<Disciplina> selectedDisciplinas) {
 		this.selectedDisciplinas = selectedDisciplinas;
 	}
 
+	/**
+	 * @return the alunos
+	 */
 	public Set<Aluno> getAlunos() {
 		return alunos;
 	}
 
+	/**
+	 * @param alunos the alunos to set
+	 */
 	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 
+	/**
+	 * @return the cursos
+	 */
 	public Set<Curso> getCursos() {
 		return cursos;
 	}
 
+	/**
+	 * @param cursos the cursos to set
+	 */
 	public void setCursos(Set<Curso> cursos) {
 		this.cursos = cursos;
 	}

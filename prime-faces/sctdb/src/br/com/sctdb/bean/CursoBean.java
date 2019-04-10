@@ -9,7 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Aluno;
@@ -17,6 +17,10 @@ import br.com.sctdb.entity.Curso;
 import br.com.sctdb.entity.Disciplina;
 import br.com.sctdb.entity.Escola;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @ViewScoped
 public class CursoBean implements Serializable {
@@ -32,6 +36,9 @@ public class CursoBean implements Serializable {
 		alunos = new HashSet<Aluno>();
 	}
 
+	/**
+	 * 
+	 */
 	public void cadastrar() {
 		GenericDao<Curso> cdao = new GenericDao<Curso>(Curso.class);
 		try {
@@ -48,6 +55,9 @@ public class CursoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String atualizar() {
 		GenericDao<Curso> cdao = new GenericDao<Curso>(Curso.class);
 		try {
@@ -61,6 +71,9 @@ public class CursoBean implements Serializable {
 		return "lista-curso";
 	}
 
+	/**
+	 * @param cur
+	 */
 	public void excluir(Curso cur) {
 		GenericDao<Curso> cdao = new GenericDao<Curso>(Curso.class);
 		try {
@@ -73,21 +86,34 @@ public class CursoBean implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void LimparCurso() {
 		this.curso.setNome("");
 		this.curso.getEscolas().clear();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Escola> getListaEscola() {
 		GenericDao<Escola> edao = new GenericDao<Escola>(Escola.class);
 		return edao.listar();
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Curso> getListaCursos() {
 		GenericDao<Curso> cdao = new GenericDao<Curso>(Curso.class);
 		return cdao.listar();
 	}
 
+	/**
+	 * @param c
+	 * @return
+	 */
 	public String disciplinas(Curso c) {
 		String disciplinas = "";
 		for (Disciplina disciplina : c.getDisciplinas()) {
@@ -96,6 +122,9 @@ public class CursoBean implements Serializable {
 		return disciplinas;
 	}
 
+	/**
+	 * @param event
+	 */
 	public void listarAlunos(AjaxBehaviorEvent event) {
 		for (Disciplina disciplina : this.curso.getDisciplinas()) {
 			for (Aluno al : disciplina.getAlunos()) {
@@ -104,28 +133,46 @@ public class CursoBean implements Serializable {
 		}
 	}
 
-	public List<Escola> getSelectedEscolas() {
-		return selectedEscolas;
-	}
-
-	public void setSelectedEscolas(List<Escola> selectedEscolas) {
-		this.selectedEscolas = selectedEscolas;
-	}
-
+	/**
+	 * @return the curso
+	 */
 	public Curso getCurso() {
 		return curso;
 	}
 
+	/**
+	 * @param curso the curso to set
+	 */
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 
+	/**
+	 * @return the alunos
+	 */
 	public Set<Aluno> getAlunos() {
 		return alunos;
 	}
 
+	/**
+	 * @param alunos the alunos to set
+	 */
 	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	/**
+	 * @return the selectedEscolas
+	 */
+	public List<Escola> getSelectedEscolas() {
+		return selectedEscolas;
+	}
+
+	/**
+	 * @param selectedEscolas the selectedEscolas to set
+	 */
+	public void setSelectedEscolas(List<Escola> selectedEscolas) {
+		this.selectedEscolas = selectedEscolas;
 	}
 
 }

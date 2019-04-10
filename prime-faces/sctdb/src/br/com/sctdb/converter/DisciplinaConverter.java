@@ -8,6 +8,10 @@ import javax.faces.convert.FacesConverter;
 import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Disciplina;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @FacesConverter("disciplinaConverter")
 public class DisciplinaConverter implements Converter {
 

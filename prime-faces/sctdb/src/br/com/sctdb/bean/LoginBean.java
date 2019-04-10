@@ -11,20 +11,33 @@ import br.com.sctdb.dao.GenericDao;
 import br.com.sctdb.entity.Usuario;
 import br.com.sctdb.util.SessionUtils;
 
+/**
+ * @author Jhonatas Oliveira
+ *
+ */
 @ManagedBean
 @SessionScoped
 public class LoginBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
 
 	private boolean loggedIn;
 
+	/**
+	 * 
+	 */
 	public LoginBean() {
 		usuario = new Usuario();
 	}
 
+	/**
+	 * @return
+	 */
 	public String logar() {
 		GenericDao<Usuario> udao = new GenericDao<Usuario>(Usuario.class);
 		String redirect = "";
@@ -66,23 +79,38 @@ public class LoginBean implements Serializable {
 		return redirect;
 	}
 
+	/**
+	 * @return
+	 */
 	public String deslogar() {
 		SessionUtils.invalidateSession();
 		return "/index?faces-redirect=true";
 	}
 
+	/**
+	 * @return the usuario
+	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
+	/**
+	 * @param usuario the usuario to set
+	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
+	/**
+	 * @return the loggedIn
+	 */
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
 
+	/**
+	 * @param loggedIn the loggedIn to set
+	 */
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}

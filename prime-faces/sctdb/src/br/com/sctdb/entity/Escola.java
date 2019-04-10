@@ -24,6 +24,9 @@ import javax.persistence.UniqueConstraint;
 @NamedQuery(name = "Escola.findAll", query = "select f from Escola f")
 public class Escola implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,58 +52,127 @@ public class Escola implements Serializable {
 	@OneToMany
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
+	/**
+	 * 
+	 */
+	public Escola() {
+	}
+
+	/**
+	 * @param id
+	 * @param nome
+	 * @param endereco
+	 * @param telefone
+	 * @param cursos
+	 * @param professores
+	 * @param alunos
+	 */
+	public Escola(int id, String nome, String endereco, String telefone, List<Curso> cursos,
+			List<Professor> professores, List<Aluno> alunos) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.cursos = cursos;
+		this.professores = professores;
+		this.alunos = alunos;
+	}
+
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the endereco
+	 */
 	public String getEndereco() {
 		return endereco;
 	}
 
+	/**
+	 * @param endereco the endereco to set
+	 */
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
+	/**
+	 * @return the telefone
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
+	/**
+	 * @param telefone the telefone to set
+	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * @return the cursos
+	 */
 	public List<Curso> getCursos() {
 		return cursos;
 	}
 
+	/**
+	 * @param cursos the cursos to set
+	 */
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
 
+	/**
+	 * @return the professores
+	 */
 	public List<Professor> getProfessores() {
 		return professores;
 	}
 
+	/**
+	 * @param professores the professores to set
+	 */
 	public void setProfessores(List<Professor> professores) {
 		this.professores = professores;
 	}
 
+	/**
+	 * @return the alunos
+	 */
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
+	/**
+	 * @param alunos the alunos to set
+	 */
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
 	}
@@ -125,6 +197,12 @@ public class Escola implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Escola [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone + ", cursos="
+				+ cursos + ", professores=" + professores + ", alunos=" + alunos + "]";
 	}
 
 }

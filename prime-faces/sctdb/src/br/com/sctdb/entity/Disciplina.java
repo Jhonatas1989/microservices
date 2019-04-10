@@ -25,6 +25,9 @@ import javax.persistence.UniqueConstraint;
 @NamedQuery(name = "Disciplina.findAll", query = "select f from Disciplina f")
 public class Disciplina implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -50,52 +53,88 @@ public class Disciplina implements Serializable {
 					@JoinColumn(name = "IDCURSO", nullable = false, updatable = false) })
 	private List<Curso> cursos = new ArrayList<Curso>();
 
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the cargaHoraria
+	 */
 	public Double getCargaHoraria() {
 		return cargaHoraria;
 	}
 
+	/**
+	 * @param cargaHoraria the cargaHoraria to set
+	 */
 	public void setCargaHoraria(Double cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 
+	/**
+	 * @return the professores
+	 */
 	public List<Professor> getProfessores() {
 		return professores;
 	}
 
+	/**
+	 * @param professores the professores to set
+	 */
 	public void setProfessores(List<Professor> professores) {
 		this.professores = professores;
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
-
+	/**
+	 * @return the alunos
+	 */
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
+	/**
+	 * @param alunos the alunos to set
+	 */
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	/**
+	 * @return the cursos
+	 */
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	/**
+	 * @param cursos the cursos to set
+	 */
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	@Override
@@ -124,6 +163,12 @@ public class Disciplina implements Serializable {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Disciplina [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", professores="
+				+ professores + ", alunos=" + alunos + ", cursos=" + cursos + "]";
 	}
 
 }
