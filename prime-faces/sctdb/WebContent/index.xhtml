@@ -27,7 +27,7 @@
 
 		</h:panelGrid>
 
-		<p:commandButton id="submitButton" value="Logar" action="#{loginBean.logar}" />
+		<p:commandButton id="submitButton" value="Logar" action="#{loginBean.logar()}" />
 		<h:button rendered="#{empty usuarioBean.listaUsuarios}" outcome="/paginas/usuario/cadastro-usuario" value="Cadastrar Usuario"></h:button>
 	</h:form>
 

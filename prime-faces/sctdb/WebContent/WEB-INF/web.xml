@@ -20,12 +20,12 @@
 	</welcome-file-list>
 
 	<!-- login filter -->
-<!-- 	<filter> -->
-<!-- 		<filter-name>AuthorizationFilter</filter-name> -->
-<!-- 		<filter-class>br.com.sctdb.filter.AuthorizationFilter</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>AuthorizationFilter</filter-name> -->
-<!-- 		<url-pattern>/paginas/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
+	<filter>
+		<filter-name>AuthorizationFilter</filter-name>
+		<filter-class>br.com.sctdb.filter.AuthorizationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>/paginas/*</url-pattern>
+	</filter-mapping>
 </web-app>
